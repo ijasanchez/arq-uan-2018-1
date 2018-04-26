@@ -8,7 +8,7 @@ package uan.edu.co.holamundo;
 public class HolaMundo {
 	// El método main inicia la ejecución de una aplicación Java
 	public static void main(String[] args) {
-		System.out.println("Bienvenidos a la programación en Java");
+		System.out.println("Bienvenidos    a la programación en Java");
 	} // end method main
 
 }
