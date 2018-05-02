@@ -1,4 +1,4 @@
-package hello.model;
+package uan.edu.co.customer.manager.model;
 
 import java.util.List;
 
