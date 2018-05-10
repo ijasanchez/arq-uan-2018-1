@@ -1,11 +1,14 @@
 package uan.edu.co.customer.manager.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uan.edu.co.customer.manager.model.Customer;
 import uan.edu.co.customer.manager.model.CustomerRepository;
 import uan.edu.co.customer.manager.service.ICustomerService;
+import uan.edu.co.customer.manager.service.exception.ResourceNotFoundException;
 
 @Service
 public class CustomerServiceImpl implements ICustomerService{
@@ -30,4 +33,16 @@ public class CustomerServiceImpl implements ICustomerService{
 		return repository.findByLastName(lastName);
 	}
 
+	@Override
+	public Customer update(Customer customer) throws ResourceNotFoundException {
+		Optional<Customer> found = repository.findById(customer.getId());
+		if (!found.isPresent())
+		{
+			throw new ResourceNotFoundException("Customer", "id", customer.getId());
+		}
+		else
+		{
+			return repository.save(customer);
+		}
+	}
 }

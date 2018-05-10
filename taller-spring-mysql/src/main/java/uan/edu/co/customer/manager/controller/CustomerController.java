@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import uan.edu.co.customer.manager.model.Customer;
 import uan.edu.co.customer.manager.service.ICustomerService;
+import uan.edu.co.customer.manager.service.exception.ResourceNotFoundException;
 
 
 
@@ -19,9 +21,14 @@ public class CustomerController {
 	@Autowired
 	ICustomerService customerService;
 	
-	@PutMapping("/save")
-	public ResponseEntity<Boolean> process( @RequestBody Customer customer ){
+	@PostMapping("/save")
+	public ResponseEntity<Boolean> save( @RequestBody Customer customer ){
 		return new ResponseEntity<>(customerService.save(customer), HttpStatus.OK);
+	}
+	
+	@PutMapping("/update")
+	public ResponseEntity<Customer> update( @RequestBody Customer customer ) throws ResourceNotFoundException{
+		return new ResponseEntity<>(customerService.update(customer), HttpStatus.OK);
 	}
 	
 	@GetMapping("/findall")
